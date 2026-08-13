@@ -10,6 +10,7 @@ Ce projet a été réalisé dans le cadre d'un projet de développement web en u
 
 ## Technologies utilisées
 
+
 - HTML5
 - CSS3
 - JavaScript (ES6)
