@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+
+<head>
+
+
+<meta charset="UTF-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<title>Mon Compte - AFROMODE</title>
+
+
+
+<meta name="description" content="Connectez-vous à votre compte AFROMODE ou créez un nouveau compte client.">
+
+
+
+
+
+<!-- Google Fonts -->
+
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;900&display=swap" rel="stylesheet">
+
+
+
+
+
+
+<!-- Font Awesome -->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+
+
+
+
+<!-- CSS -->
+
+
+<link rel="stylesheet" href="css/style.css">
+
+
+<link rel="stylesheet" href="css/responsive.css">
+
+
+
+</head>
+
+
+
+
+
+<body>
+
+
+
+
+
+<!-- ==========================
+          NAVBAR
+========================== -->
+
+
+<header class="header">
+
+
+<nav class="navbar container">
+
+
+
+<a href="index.html" class="logo">
+
+
+<i class="fa-solid fa-shirt"></i>
+
+
+<span>AFRO</span>MODE
+
+
+</a>
+
+
+
+
+
+
+<button class="menu-toggle">
+
+
+<i class="fa-solid fa-bars"></i>
+
+
+</button>
+
+
+
+
+
+
+<ul class="nav-menu">
+
+
+
+<li>
+
+<a href="index.html">
+
+Accueil
+
+</a>
+
+</li>
+
+
+
+
+
+
+<li>
+
+<a href="boutique.html">
+
+Boutique
+
+</a>
+
+</li>
+
+
+
+
+
+
+<li>
+
+<a href="boutique.html#nouveautes">
+
+Nouveautés
+
+</a>
+
+</li>
+
+
+
+
+
+
+<li>
+
+<a href="boutique.html#promos">
+
+Promotions
+
+</a>
+
+</li>
+
+
+
+
+
+<li>
+
+<a href="contact.html">
+
+Contact
+
+</a>
+
+</li>
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+<div class="nav-actions">
+
+
+
+<a href="#" id="search-btn">
+
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+
+</a>
+
+
+
+
+
+<a href="#">
+
+
+<i class="fa-regular fa-heart"></i>
+
+
+</a>
+
+
+
+
+
+<a href="compte.html">
+
+
+<i class="fa-solid fa-user"></i>
+
+
+</a>
+
+
+
+
+
+<a href="panier.html">
+
+
+<i class="fa-solid fa-cart-shopping"></i>
+
+
+
+<span class="cart-badge">
+
+0
+
+</span>
+
+
+
+</a>
+
+
+
+
+</div>
+
+
+
+
+
+
+</nav>
+
+
+
+</header>
+
+
+
+
+
+
+
+
+
+<main>
+
+
+
+
+
+
+<!-- ==========================
+        HEADER PAGE
+========================== -->
+
+
+<section class="page-header">
+
+
+<div class="container">
+
+
+
+<h1>
+
+Mon Compte
+
+</h1>
+
+
+
+
+
+
+<div class="breadcrumb">
+
+
+<a href="index.html">
+
+Accueil
+
+</a>
+
+
+
+<span>
+
+›
+
+</span>
+
+
+
+Mon Compte
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- ==========================
+       TABS COMPTE
+========================== -->
+
+
+<section class="account-section">
+
+
+<div class="container account-container">
+
+
+
+
+
+
+<div class="account-tabs">
+
+
+<button class="tab-btn active" data-tab="login">
+
+
+Se connecter
+
+
+</button>
+
+
+
+
+
+<button class="tab-btn" data-tab="register">
+
+
+Créer un compte
+
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- ==========================
+      FORMULAIRE CONNEXION
+========================== -->
+
+
+<div class="tab-content active" id="login">
+
+
+
+
+
+<form id="login-form">
+
+
+
+
+
+<div class="form-group">
+
+
+<label for="login-email">
+
+Email
+
+</label>
+
+
+
+<input
+
+type="email"
+
+id="login-email"
+
+required
+
+placeholder="Votre email">
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label for="login-password">
+
+Mot de passe
+
+</label>
+
+
+
+<input
+
+type="password"
+
+id="login-password"
+
+required
+
+placeholder="Votre mot de passe">
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="remember-box">
+
+
+
+<label>
+
+
+<input
+
+type="checkbox"
+
+id="remember">
+
+
+Se souvenir de moi
+
+
+</label>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<a href="#" id="forgot-password">
+
+
+Mot de passe oublié ?
+
+
+</a>
+
+
+
+
+
+
+
+<button 
+
+type="submit"
+
+class="btn-login">
+
+
+Se connecter
+
+
+</button>
+
+
+
+
+
+
+
+<p id="login-message"></p>
+
+
+
+
+
+
+</form>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ==========================
+      INSCRIPTION
+========================== -->
+
+
+<div class="tab-content" id="register">
+
+
+
+
+
+<form id="register-form">
+
+
+
+
+
+
+<div class="form-row">
+
+
+
+
+
+<div class="form-group">
+
+
+<label for="firstname">
+
+
+Prénom
+
+
+</label>
+
+
+
+<input
+
+type="text"
+
+id="firstname"
+
+required
+
+placeholder="Votre prénom">
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label for="lastname">
+
+
+Nom
+
+
+</label>
+
+
+
+<input
+
+type="text"
+
+id="lastname"
+
+required
+
+placeholder="Votre nom">
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label for="register-email">
+
+
+Email
+
+
+</label>
+
+
+
+
+<input
+
+type="email"
+
+id="register-email"
+
+required
+
+placeholder="Votre email">
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label for="phone">
+
+
+Téléphone
+
+
+</label>
+
+
+
+
+<input
+
+type="tel"
+
+id="phone"
+
+required
+
+placeholder="+229 97 88 00 00">
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label for="register-password">
+
+
+Mot de passe
+
+
+</label>
+
+
+
+
+<input
+
+type="password"
+
+id="register-password"
+
+required
+
+minlength="8"
+
+placeholder="8 caractères minimum avec un chiffre">
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label for="confirm-password">
+
+
+Confirmer le mot de passe
+
+
+</label>
+
+
+
+
+<input
+
+type="password"
+
+id="confirm-password"
+
+required
+
+placeholder="Confirmer votre mot de passe">
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="conditions">
+
+
+<label>
+
+
+<input
+
+type="checkbox"
+
+id="terms"
+
+required>
+
+
+J'accepte les conditions générales de vente
+
+
+
+</label>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<button 
+
+type="submit"
+
+class="btn-register">
+
+
+Créer mon compte
+
+
+</button>
+
+
+
+
+
+
+
+
+<p id="register-message"></p>
+
+
+
+
+
+
+</form>
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- ==========================
+       TABLEAU DE BORD CLIENT
+========================== -->
+
+
+<section class="dashboard" id="dashboard" style="display:none;">
+
+
+
+<div class="dashboard-grid">
+
+
+
+
+
+
+<!-- ==========================
+       MES INFORMATIONS
+========================== -->
+
+
+<div class="dashboard-card">
+
+
+
+<h2>
+
+Mes informations
+
+</h2>
+
+
+
+
+
+
+<div class="profile-info">
+
+
+
+<p>
+
+<strong>Nom :</strong>
+
+<span id="client-name">
+
+Client AFROMODE
+
+</span>
+
+</p>
+
+
+
+
+
+
+<p>
+
+<strong>Email :</strong>
+
+<span id="client-email">
+
+client@email.com
+
+</span>
+
+</p>
+
+
+
+
+
+
+<p>
+
+<strong>Téléphone :</strong>
+
+<span id="client-phone">
+
++229 00 00 00 00
+
+</span>
+
+</p>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<button class="btn-edit">
+
+Modifier
+
+</button>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ==========================
+       MES COMMANDES
+========================== -->
+
+
+<div class="dashboard-card orders-card">
+
+
+
+<h2>
+
+Mes commandes
+
+</h2>
+
+
+
+
+
+
+
+<table>
+
+
+
+<thead>
+
+
+<tr>
+
+
+<th>
+
+N° commande
+
+</th>
+
+
+
+<th>
+
+Date
+
+</th>
+
+
+
+<th>
+
+Articles
+
+</th>
+
+
+
+<th>
+
+Total
+
+</th>
+
+
+
+<th>
+
+Statut
+
+</th>
+
+
+
+</tr>
+
+
+
+</thead>
+
+
+
+
+
+
+
+
+<tbody>
+
+
+
+<tr>
+
+
+<td>
+
+AFR-45821
+
+</td>
+
+
+
+<td>
+
+08/07/2026
+
+</td>
+
+
+
+<td>
+
+Robe wax Adinkra
+
+</td>
+
+
+
+<td>
+
+18 500 FCFA
+
+</td>
+
+
+
+<td>
+
+
+<span class="status delivered">
+
+Livré
+
+</span>
+
+
+</td>
+
+
+
+</tr>
+
+
+
+
+
+
+
+<tr>
+
+
+<td>
+
+AFR-45822
+
+</td>
+
+
+
+<td>
+
+05/07/2026
+
+</td>
+
+
+
+<td>
+
+Sac raphia brodé
+
+</td>
+
+
+
+<td>
+
+9 800 FCFA
+
+</td>
+
+
+
+<td>
+
+
+
+<span class="status pending">
+
+En cours
+
+</span>
+
+
+
+</td>
+
+
+
+</tr>
+
+
+
+
+</tbody>
+
+
+
+
+
+</table>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ==========================
+       MES ADRESSES
+========================== -->
+
+
+<div class="dashboard-card">
+
+
+
+<h2>
+
+Mes adresses
+
+</h2>
+
+
+
+
+
+
+<div class="address-box">
+
+
+<p>
+
+<strong>Adresse livraison :</strong>
+
+</p>
+
+
+
+<p>
+
+Rue des Artisans,
+
+Quartier Zogbohouè,
+
+Cotonou, Bénin
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+
+<button class="btn-edit">
+
+Modifier
+
+</button>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+</div>
+<!-- fin account-container -->
+
+
+
+</section>
+
+
+
+
+
+</main>
+
+
+
+
+
+
+<!-- ==========================
+       BOUTON DECONNEXION
+========================== -->
+
+
+<section class="logout-section" id="logout-section" style="display:none;">
+
+
+<div class="container">
+
+
+<button id="logout-btn" class="btn-logout">
+
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+Se déconnecter
+
+
+</button>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ==========================
+          FOOTER
+========================== -->
+
+
+<footer class="footer">
+
+
+
+<div class="container footer-grid">
+
+
+
+
+
+
+<div>
+
+
+<h3>
+
+AFROMODE
+
+</h3>
+
+
+
+<p>
+
+"L'Afrique se porte bien"
+
+</p>
+
+
+
+<p>
+
+Boutique de mode africaine contemporaine à Cotonou depuis 2019.
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div>
+
+
+<h3>
+
+Nous contacter
+
+</h3>
+
+
+
+
+<p>
+
+
+<i class="fa-solid fa-location-dot"></i>
+
+Rue des Artisans, Zogbohouè, Cotonou
+
+</p>
+
+
+
+
+
+<p>
+
+
+<i class="fa-brands fa-whatsapp"></i>
+
++229 97 88 00 00
+
+
+</p>
+
+
+
+
+
+<p>
+
+contact@afromode.bj
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div>
+
+
+<h3>
+
+Navigation
+
+</h3>
+
+
+
+
+<a href="index.html">
+
+Accueil
+
+</a>
+
+
+
+<br>
+
+
+
+<a href="boutique.html">
+
+Boutique
+
+</a>
+
+
+
+
+<br>
+
+
+
+<a href="panier.html">
+
+Panier
+
+</a>
+
+
+
+
+<br>
+
+
+
+<a href="contact.html">
+
+Contact
+
+</a>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div>
+
+
+<h3>
+
+Suivez-nous
+
+</h3>
+
+
+
+
+<div class="socials">
+
+
+<a href="#">
+
+<i class="fa-brands fa-instagram"></i>
+
+</a>
+
+
+
+
+
+<a href="#">
+
+<i class="fa-brands fa-facebook"></i>
+
+</a>
+
+
+
+
+
+
+<a href="#">
+
+<i class="fa-brands fa-tiktok"></i>
+
+</a>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="footer-bottom">
+
+
+<p>
+
+© 2026 AFROMODE — Tous droits réservés
+
+</p>
+
+
+
+</div>
+
+
+
+
+</footer>
+
+
+
+
+
+
+
+
+
+<!-- JAVASCRIPT -->
+
+
+<script src="js/main.js"></script>
+<script src="js/compte.js"></script>
+<script src="js/panier.js"></script>
+<script src="js/animation.js"></script>
+
+
+</body>
+
+
+</html>

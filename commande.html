@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+
+<head>
+
+
+<meta charset="UTF-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<title>Finaliser ma commande - AFROMODE</title>
+
+
+
+<meta name="description" content="Finalisez votre commande AFROMODE avec livraison et paiement sécurisé.">
+
+
+
+
+
+<!-- Google Fonts -->
+
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;900&display=swap" rel="stylesheet">
+
+
+
+
+
+<!-- Font Awesome -->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+
+
+
+<!-- CSS -->
+
+
+<link rel="stylesheet" href="css/style.css">
+
+<link rel="stylesheet" href="css/responsive.css">
+
+
+
+</head>
+
+
+
+
+
+<body>
+
+
+
+
+
+<!-- ==========================
+          NAVBAR
+========================== -->
+
+
+<header class="header">
+
+
+<nav class="navbar container">
+
+
+<a href="index.html" class="logo">
+
+
+<i class="fa-solid fa-shirt"></i>
+
+
+<span>AFRO</span>MODE
+
+
+</a>
+
+
+
+
+
+
+<button class="menu-toggle">
+
+
+<i class="fa-solid fa-bars"></i>
+
+
+</button>
+
+
+
+
+
+<ul class="nav-menu">
+
+
+<li>
+
+<a href="index.html">
+
+Accueil
+
+</a>
+
+</li>
+
+
+
+
+
+<li>
+
+<a href="boutique.html">
+
+Boutique
+
+</a>
+
+</li>
+
+
+
+
+
+<li>
+
+<a href="boutique.html#nouveautes">
+
+Nouveautés
+
+</a>
+
+</li>
+
+
+
+
+
+<li>
+
+<a href="boutique.html#promos">
+
+Promotions
+
+</a>
+
+</li>
+
+
+
+
+
+<li>
+
+<a href="contact.html">
+
+Contact
+
+</a>
+
+</li>
+
+
+
+</ul>
+
+
+
+
+
+
+
+<div class="nav-actions">
+
+
+<a href="#" id="search-btn">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+</a>
+
+
+
+
+
+<a href="#">
+
+<i class="fa-regular fa-heart"></i>
+
+</a>
+
+
+
+
+
+<a href="compte.html">
+
+<i class="fa-regular fa-user"></i>
+
+</a>
+
+
+
+
+
+
+<a href="panier.html">
+
+
+<i class="fa-solid fa-cart-shopping"></i>
+
+
+<span class="cart-badge">
+
+0
+
+</span>
+
+
+</a>
+
+
+
+</div>
+
+
+
+
+
+
+</nav>
+
+
+</header>
+
+
+
+
+
+
+
+
+
+<main>
+
+
+
+
+
+
+<!-- ==========================
+        PAGE HEADER
+========================== -->
+
+
+<section class="page-header">
+
+
+<div class="container">
+
+
+<h1>
+
+Finaliser ma commande
+
+</h1>
+
+
+
+
+
+<div class="breadcrumb">
+
+
+<a href="index.html">
+
+Accueil
+
+</a>
+
+
+<span>
+
+›
+
+</span>
+
+
+Commande
+
+
+</div>
+
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ==========================
+       PROGRESSION
+========================== -->
+
+
+<section class="checkout-progress">
+
+
+<div class="container progress-box">
+
+
+
+<div class="step active">
+
+
+<span>
+
+1
+
+</span>
+
+
+<p>
+
+Livraison
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+<div class="step">
+
+
+<span>
+
+2
+
+</span>
+
+
+<p>
+
+Paiement
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+<div class="step">
+
+
+<span>
+
+3
+
+</span>
+
+
+<p>
+
+Confirmation
+
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- ==========================
+       CHECKOUT
+========================== -->
+
+
+<section class="checkout-section">
+
+
+<div class="container checkout-layout">
+
+
+
+
+
+
+<!-- FORMULAIRE -->
+
+
+<div class="checkout-form">
+
+
+<h2>
+
+Informations de livraison
+
+</h2>
+
+
+
+
+
+<form id="order-form">
+
+
+
+
+<div class="form-row">
+
+
+<div class="form-group">
+
+
+<label for="firstname">
+
+Prénom *
+
+</label>
+
+
+
+<input 
+
+type="text"
+
+id="firstname"
+
+placeholder="Votre prénom">
+
+
+<span class="error-message"></span>
+
+
+</div>
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label for="lastname">
+
+Nom *
+
+</label>
+
+
+
+<input 
+
+type="text"
+
+id="lastname"
+
+placeholder="Votre nom">
+
+
+<span class="error-message"></span>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- TELEPHONE -->
+
+
+<div class="form-group">
+
+
+<label for="phone">
+
+Téléphone WhatsApp *
+
+</label>
+
+
+
+<input
+
+type="tel"
+
+id="phone"
+
+placeholder="+229 97 00 00 00">
+
+
+
+<span class="error-message"></span>
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- EMAIL -->
+
+
+<div class="form-group">
+
+
+<label for="email">
+
+Email
+
+</label>
+
+
+
+<input
+
+type="email"
+
+id="email"
+
+placeholder="Votre adresse email">
+
+
+
+<span class="error-message"></span>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- ADRESSE -->
+
+
+<div class="form-group">
+
+
+<label for="address">
+
+Adresse complète *
+
+</label>
+
+
+
+<input
+
+type="text"
+
+id="address"
+
+placeholder="Quartier, rue, point de repère">
+
+
+
+<span class="error-message"></span>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- VILLE -->
+
+
+<div class="form-group">
+
+
+<label for="city">
+
+Ville de livraison *
+
+</label>
+
+
+
+
+<select id="city">
+
+
+
+<option value="">
+
+Choisir une ville
+
+</option>
+
+
+
+<option value="cotonou">
+
+Cotonou (24h)
+
+</option>
+
+
+
+
+<option value="porto">
+
+Porto-Novo (48h)
+
+</option>
+
+
+
+
+
+<option value="parakou">
+
+Parakou (5 jours)
+
+</option>
+
+
+
+
+
+<option value="autre">
+
+Autre ville du Bénin (5 jours)
+
+</option>
+
+
+
+</select>
+
+
+
+<span class="error-message"></span>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- INSTRUCTIONS -->
+
+
+<div class="form-group">
+
+
+<label for="message">
+
+Instructions supplémentaires
+
+</label>
+
+
+
+
+<textarea
+
+id="message"
+
+rows="4"
+
+placeholder="Appeler avant d'arriver, sonner portail vert...">
+
+</textarea>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ==========================
+       PAIEMENT
+========================== -->
+
+
+
+<h2>
+
+Choisissez votre mode de paiement
+
+</h2>
+
+
+
+
+
+<fieldset class="payment-method">
+
+
+
+<legend>
+
+Mode de paiement
+
+</legend>
+
+
+
+
+
+
+
+
+<label class="payment-card">
+
+
+<input 
+
+type="radio"
+
+name="payment"
+
+value="cash">
+
+
+
+<i class="fa-solid fa-money-bill-wave"></i>
+
+
+
+<div>
+
+
+<strong>
+
+Espèces à la livraison
+
+</strong>
+
+
+
+<p>
+
+Payez en cash au livreur
+
+</p>
+
+
+
+</div>
+
+
+</label>
+
+
+
+
+
+
+
+
+<label class="payment-card">
+
+
+<input 
+
+type="radio"
+
+name="payment"
+
+value="momo">
+
+
+
+<i class="fa-solid fa-mobile-screen-button"></i>
+
+
+
+<div>
+
+
+<strong>
+
+MTN MoMo
+
+</strong>
+
+
+
+<p>
+
+Paiement Mobile Money MTN
+
+</p>
+
+
+
+</div>
+
+
+</label>
+
+
+
+
+
+
+
+
+<label class="payment-card">
+
+
+<input 
+
+type="radio"
+
+name="payment"
+
+value="moov">
+
+
+
+<i class="fa-solid fa-mobile-screen-button"></i>
+
+
+
+<div>
+
+
+<strong>
+
+Moov Money
+
+</strong>
+
+
+
+<p>
+
+Paiement Mobile Money Moov
+
+</p>
+
+
+
+</div>
+
+
+</label>
+
+
+
+
+
+
+
+
+<label class="payment-card">
+
+
+<input 
+
+type="radio"
+
+name="payment"
+
+value="wave">
+
+
+
+<i class="fa-solid fa-mobile-screen-button"></i>
+
+
+
+<div>
+
+
+<strong>
+
+Wave
+
+</strong>
+
+
+
+<p>
+
+Paiement rapide via Wave
+
+</p>
+
+
+
+</div>
+
+
+</label>
+
+
+
+
+
+
+<span class="error-message" id="payment-error"></span>
+
+
+
+</fieldset>
+
+
+
+
+
+
+
+<button 
+
+type="submit"
+
+class="confirm-order-btn">
+
+
+Confirmer ma commande
+
+
+</button>
+
+
+
+
+
+
+
+</form>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ==========================
+      RECAPITULATIF PANIER
+========================== -->
+
+
+<aside class="order-summary">
+
+
+
+<h2>
+
+Votre commande
+
+</h2>
+
+
+
+
+
+
+<div id="checkout-items">
+
+<!-- Les articles seront ajoutés par JavaScript -->
+
+</div>
+
+
+
+
+
+
+
+
+<div class="summary-line">
+
+
+<span>
+
+Sous-total
+
+</span>
+
+
+
+<strong id="checkout-subtotal">
+
+0 FCFA
+
+</strong>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="summary-line">
+
+
+<span>
+
+Livraison
+
+</span>
+
+
+
+<strong id="checkout-delivery">
+
+0 FCFA
+
+</strong>
+
+
+
+</div>
+
+
+
+
+
+
+
+<hr>
+
+
+
+
+
+
+
+<div class="summary-total">
+
+
+<span>
+
+Total final
+
+</span>
+
+
+
+<strong id="checkout-total">
+
+0 FCFA
+
+</strong>
+
+
+
+</div>
+
+
+
+
+
+
+</aside>
+
+
+
+
+
+
+
+</div>
+<!-- FIN CHECKOUT LAYOUT -->
+
+
+
+</section>
+
+
+
+
+
+
+</main>
+
+
+
+
+
+
+<!-- ==========================
+      CONFIRMATION COMMANDE
+========================== -->
+
+
+<section class="order-confirmation" id="confirmation-box" style="display:none;">
+
+
+
+<div class="confirmation-content">
+
+
+
+<i class="fa-solid fa-circle-check"></i>
+
+
+
+
+
+<h2>
+
+Commande confirmée !
+
+</h2>
+
+
+
+
+
+
+<p>
+
+Merci pour votre commande !
+
+Notre équipe vous contactera sous 2h sur WhatsApp pour confirmer les détails et organiser la livraison.
+
+</p>
+
+
+
+
+
+
+<h3>
+
+Commande n°
+
+<span id="order-number">
+
+AFR-00000
+
+</span>
+
+
+</h3>
+
+
+
+
+
+
+
+<a href="boutique.html" class="btn-primary">
+
+
+Retour à la boutique
+
+
+</a>
+
+
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ==========================
+          FOOTER
+========================== -->
+
+
+<footer class="footer">
+
+
+<div class="container footer-grid">
+
+
+
+
+
+
+<div>
+
+
+<h3>
+
+AFROMODE
+
+</h3>
+
+
+
+<p>
+
+"L'Afrique se porte bien"
+
+</p>
+
+
+
+<p>
+
+Mode africaine contemporaine à Cotonou depuis 2019.
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div>
+
+
+<h3>
+
+Contact
+
+</h3>
+
+
+
+<p>
+
+<i class="fa-solid fa-location-dot"></i>
+
+Rue des Artisans, Zogbohouè, Cotonou
+
+</p>
+
+
+
+
+<p>
+
+<i class="fa-brands fa-whatsapp"></i>
+
++229 97 88 00 00
+
+</p>
+
+
+
+
+<p>
+
+contact@afromode.bj
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div>
+
+
+<h3>
+
+Liens rapides
+
+</h3>
+
+
+
+
+<a href="index.html">
+
+Accueil
+
+</a>
+
+
+
+<br>
+
+
+
+<a href="boutique.html">
+
+Boutique
+
+</a>
+
+
+
+
+<br>
+
+
+
+<a href="panier.html">
+
+Panier
+
+</a>
+
+
+
+
+<br>
+
+
+
+<a href="compte.html">
+
+Mon compte
+
+</a>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div>
+
+
+<h3>
+
+Réseaux sociaux
+
+</h3>
+
+
+
+<div class="socials">
+
+
+
+<a href="#">
+
+<i class="fa-brands fa-instagram"></i>
+
+</a>
+
+
+
+
+<a href="#">
+
+<i class="fa-brands fa-facebook"></i>
+
+</a>
+
+
+
+
+<a href="#">
+
+<i class="fa-brands fa-tiktok"></i>
+
+</a>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="footer-bottom">
+
+
+<p>
+
+© 2026 AFROMODE — Tous droits réservés
+
+</p>
+
+
+
+</div>
+
+
+
+</footer>
+
+
+
+
+
+
+
+
+
+<!-- JAVASCRIPT -->
+
+
+<script src="js/panier.js"></script>
+<script src="js/main.js"></script>
+<script src="js/animation.js"></script>
+
+
+
+
+
+
+
+</body>
+
+
+</html>
