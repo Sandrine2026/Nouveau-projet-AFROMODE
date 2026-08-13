@@ -1037,3 +1037,98 @@ function initTemoignagesSlider(){
 }
 
 document.addEventListener("DOMContentLoaded", initTemoignagesSlider);
+
+/*====================================================
+        AJOUT AU PANIER — SECTION "NOUVEAUTES"
+        (cartes produits sur la page d'accueil)
+======================================================*/
+
+function initAjoutPanierNouveautes(){
+
+    const section = document.querySelector("#nouveautes");
+
+    if(!section) return;
+
+    const cartes = section.querySelectorAll(".product-card");
+
+    cartes.forEach(carte => {
+
+        const boutonAjouter = carte.querySelector(".btn-cart");
+
+        if(!boutonAjouter) return;
+
+        boutonAjouter.addEventListener("click", () => {
+
+            const nom = carte.dataset.nom || "Produit";
+
+            const prix = Number(carte.dataset.prix) || 0;
+
+            const image = carte.querySelector("img")?.getAttribute("src") || "";
+
+            const produit = {
+
+                id: nom,
+
+                nom: nom,
+
+                prix: prix,
+
+                taille: "Unique",
+
+                couleur: "Standard",
+
+                quantite: 1,
+
+                image: image
+
+            };
+
+            ajouterAuPanier(produit);
+
+        });
+
+    });
+
+}
+
+document.addEventListener("DOMContentLoaded", initAjoutPanierNouveautes);
+
+/*====================================================
+        FAVORIS — SECTION "NOUVEAUTES"
+        Bascule visuelle du cœur (sans persistance)
+======================================================*/
+
+function initFavorisNouveautes(){
+
+    const section = document.querySelector("#nouveautes");
+
+    if(!section) return;
+
+    const boutonsFavoris = section.querySelectorAll(".favorite");
+
+    boutonsFavoris.forEach(bouton => {
+
+        bouton.addEventListener("click", (e) => {
+
+            e.stopPropagation();
+
+            bouton.classList.toggle("active");
+
+            const icone = bouton.querySelector("i");
+
+            if(icone){
+
+                icone.classList.toggle("fa-regular");
+
+                icone.classList.toggle("fa-solid");
+
+            }
+
+        });
+
+    });
+
+}
+
+document.addEventListener("DOMContentLoaded", initFavorisNouveautes);
+ent.addEventListener("DOMContentLoaded", initTemoignagesSlider);
