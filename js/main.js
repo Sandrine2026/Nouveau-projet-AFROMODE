@@ -11,17 +11,17 @@ const body = document.body;
 
 const menuToggle = document.querySelector(".menu-toggle");
 
-const navLinks = document.querySelector(".nav-links");
+const navLinks = document.querySelector(".nav-menu");
 
 const badgePanier = document.querySelector(".cart-count");
 
-const rechercheBtn = document.querySelector(".search-btn");
+const rechercheBtn = document.querySelector("#search-btn");
 
-const barreRecherche = document.querySelector(".search-bar");
+const barreRecherche = document.querySelector(".search-box");
 
 const fermerRecherche = document.querySelector(".close-search");
 
-const champRecherche = document.querySelector("#searchInput");
+const champRecherche = document.querySelector("#search-input");
 
 const produits = document.querySelectorAll(".product-card");
 
@@ -29,15 +29,81 @@ const produits = document.querySelectorAll(".product-card");
         MENU HAMBURGER
 ====================================*/
 
-if(menuToggle){
+function fermerMenu(){
+
+    if(!navLinks) return;
+
+    navLinks.classList.remove("active");
+
+    body.classList.remove("menu-open");
+
+    menuToggle?.classList.remove("active");
+
+    menuToggle?.setAttribute("aria-expanded","false");
+
+    const icone = menuToggle?.querySelector("i");
+
+    if(icone){
+
+        icone.classList.remove("fa-xmark");
+
+        icone.classList.add("fa-bars");
+
+    }
+
+}
+
+function ouvrirMenu(){
+
+    if(!navLinks) return;
+
+    navLinks.classList.add("active");
+
+    body.classList.add("menu-open");
+
+    menuToggle?.classList.add("active");
+
+    menuToggle?.setAttribute("aria-expanded","true");
+
+    const icone = menuToggle?.querySelector("i");
+
+    if(icone){
+
+        icone.classList.remove("fa-bars");
+
+        icone.classList.add("fa-xmark");
+
+    }
+
+}
+
+if(menuToggle && navLinks){
 
     menuToggle.addEventListener("click",()=>{
 
-        navLinks.classList.toggle("active");
+        const estOuvert = navLinks.classList.contains("active");
 
-        body.classList.toggle("menu-open");
+        if(estOuvert){
 
-        menuToggle.classList.toggle("active");
+            fermerMenu();
+
+        }else{
+
+            ouvrirMenu();
+
+        }
+
+    });
+
+    /* Ferme le menu automatiquement quand on clique un lien */
+
+    navLinks.querySelectorAll("a").forEach(lien=>{
+
+        lien.addEventListener("click",()=>{
+
+            fermerMenu();
+
+        });
 
     });
 
@@ -49,14 +115,12 @@ FERMETURE MENU SI CLIC EXTERIEUR
 
 document.addEventListener("click",(e)=>{
 
-    if(!navLinks) return;
+    if(!navLinks || !menuToggle) return;
 
     if(!navLinks.contains(e.target)
     && !menuToggle.contains(e.target)){
 
-        navLinks.classList.remove("active");
-
-        body.classList.remove("menu-open");
+        fermerMenu();
 
     }
 
@@ -70,9 +134,7 @@ document.addEventListener("keydown",(e)=>{
 
     if(e.key==="Escape"){
 
-        navLinks?.classList.remove("active");
-
-        body.classList.remove("menu-open");
+        fermerMenu();
 
     }
 
@@ -84,11 +146,13 @@ document.addEventListener("keydown",(e)=>{
 
 if(rechercheBtn){
 
-    rechercheBtn.addEventListener("click",()=>{
+    rechercheBtn.addEventListener("click",(e)=>{
 
-        barreRecherche.classList.toggle("active");
+        e.preventDefault();
 
-        champRecherche.focus();
+        barreRecherche?.classList.toggle("active");
+
+        champRecherche?.focus();
 
     });
 
@@ -1131,4 +1195,3 @@ function initFavorisNouveautes(){
 }
 
 document.addEventListener("DOMContentLoaded", initFavorisNouveautes);
-ent.addEventListener("DOMContentLoaded", initTemoignagesSlider);
