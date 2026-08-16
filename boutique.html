@@ -327,60 +327,38 @@ Filtres
 
 <form id="filter-form">
 
-
-
 <!-- CATEGORIE -->
 
-
-<div class="filter-group">
-
+<div class="filter-group" data-filter="categorie">
 
 <h3>
-
 Catégorie
-
 </h3>
 
-
 <label class="filter-option">
-
 <input type="checkbox" value="femmes">
-
 Femmes
-
 </label>
 
-
-
 <label class="filter-option">
-
 <input type="checkbox" value="hommes">
-
 Hommes
-
 </label>
 
-
-
 <label class="filter-option">
-
 <input type="checkbox" value="accessoires">
-
 Accessoires
-
 </label>
-
-
 
 <label class="filter-option">
-
 <input type="checkbox" value="tissu">
-
 Tissu Wax
-
 </label>
 
-
+<label class="filter-option">
+<input type="checkbox" value="enfants">
+Enfants
+</label>
 
 </div>
 
@@ -388,343 +366,152 @@ Tissu Wax
      FILTRE TAILLE
 ========================== -->
 
-
-<div class="filter-group">
-
+<div class="filter-group" data-filter="taille">
 
 <h3>
-
 Taille
-
 </h3>
 
-
-
 <label class="filter-option">
-
 <input type="checkbox" value="xs">
-
 XS
-
 </label>
 
-
-
 <label class="filter-option">
-
 <input type="checkbox" value="s">
-
 S
-
 </label>
 
-
-
 <label class="filter-option">
-
 <input type="checkbox" value="m">
-
 M
-
 </label>
 
-
-
 <label class="filter-option">
-
 <input type="checkbox" value="l">
-
 L
-
 </label>
 
-
-
 <label class="filter-option">
-
 <input type="checkbox" value="xl">
-
 XL
-
 </label>
 
-
-
 <label class="filter-option">
-
 <input type="checkbox" value="2xl">
-
 2XL
-
 </label>
-
-
 
 <label class="filter-option">
-
 <input type="checkbox" value="unique">
-
 Taille unique
-
 </label>
-
-
 
 </div>
-
-
-
-
-
-
 
 <!-- ==========================
      FILTRE COULEUR
 ========================== -->
 
-
-<div class="filter-group">
-
+<div class="filter-group" data-filter="couleur">
 
 <h3>
-
 Couleur
-
 </h3>
 
-
-
 <label class="filter-option">
-
 <input type="checkbox" value="bleu">
-
 Bleu
-
 </label>
 
-
-
 <label class="filter-option">
-
 <input type="checkbox" value="rouge">
-
 Rouge
-
 </label>
 
-
-
 <label class="filter-option">
-
 <input type="checkbox" value="jaune">
-
 Jaune
-
 </label>
 
-
-
 <label class="filter-option">
-
 <input type="checkbox" value="vert">
-
 Vert
-
 </label>
 
-
-
 <label class="filter-option">
-
 <input type="checkbox" value="noir">
-
 Noir
-
 </label>
 
-
-
 <label class="filter-option">
-
 <input type="checkbox" value="blanc">
-
 Blanc
-
 </label>
-
-
 
 <label class="filter-option">
-
-<input type="checkbox" value="multicolore">
-
-Multicolore
-
+<input type="checkbox" value="argent">
+Argent
 </label>
 
-
+<label class="filter-option">
+<input type="checkbox" value="multicolore">
+Multicolore
+</label>
 
 </div>
-
-
-
-
-
-
 
 <!-- ==========================
      PRIX
 ========================== -->
 
-
 <div class="filter-group">
 
-
 <h3>
-
 Budget maximum :
-
-<span id="price-value">
-
-50000
-
-</span>
-
+<span id="price-value">50000</span>
 FCFA
-
 </h3>
 
-
-
-<input 
+<input
 type="range"
 id="price-range"
 min="0"
 max="50000"
+step="500"
 value="50000">
 
-
 </div>
-
-
-
-
-
-
 
 <!-- ==========================
      STATUT
 ========================== -->
 
-
-<div class="filter-group">
-
+<div class="filter-group" data-filter="statut">
 
 <h3>
-
 Afficher uniquement
-
 </h3>
 
-
-
 <label class="filter-option">
-
-
-<input 
-type="checkbox"
-value="nouveau">
-
-
+<input type="checkbox" value="nouveau">
 Nouveautés
-
-
 </label>
 
-
-
-
 <label class="filter-option">
-
-
-<input 
-type="checkbox"
-value="promo">
-
-
+<input type="checkbox" value="promo">
 En promotion
-
-
 </label>
-
-
-
-
-
-<label class="filter-option">
-
-
-<input 
-type="checkbox"
-value="stock">
-
-
-En stock uniquement
-
-
-</label>
-
-
 
 </div>
 
-
-
-
-
-
-
-<button 
-
-
-
-<select id="filtre-categorie">
-
-<select id="filtre-taille">
-
-<select id="filtre-couleur">
-
-<input
-type="range"
-id="price-range">
-
-<button
-id="btn-filtrer">
-
+<button type="button" id="btn-filtrer" class="btn btn-primary">
 Appliquer les filtres
-
 </button>
 
-
+<button type="button" id="btn-reset" class="btn btn-reset">
+Réinitialiser
 </button>
-
-
-<button id="btn-reset" type="reset" class="btn btn-reset">
-        Réinitialiser
-</button>
-
-<button 
-type="reset"
-class="btn btn-reset">
-
-
-Tout effacer
-
-
-</button>
-
-
-
 
 </form>
 
@@ -864,617 +651,445 @@ Mieux notés
 
 <div class="products-grid" id="products-container">
 
-
-
-
-
 <!-- PRODUIT 1 -->
-
-
 <article class="product-card"
-
 data-categorie="femmes"
-
 data-taille="s m l xl"
-
 data-couleur="multicolore"
-
 data-prix="18500"
-
 data-badge="nouveau"
-
 data-note="4.8">
-
-
 
 <div class="product-image">
 
-
-<img src="images/produits/produit-01.jpg"
-alt="Robe wax Adinkra">
-
+<a href="produit.html?id=1" class="product-image-link">
+<img src="images/produits/produit-01.jpg" alt="Robe wax Adinkra">
+</a>
 
 <span class="product-badge new">
-
 Nouveau
-
 </span>
 
-
-
-<button class="favorite">
-
+<button class="favorite" aria-label="Ajouter aux favoris">
 <i class="fa-regular fa-heart"></i>
-
 </button>
 
-
 </div>
-
-
-
-
 
 <div class="product-info">
 
-
 <h3>
-
-Robe wax Adinkra
-
+<a href="produit.html?id=1">Robe wax Adinkra</a>
 </h3>
 
-
-
 <p class="category">
-
 Femmes
-
 </p>
-
-
-
 
 <div class="rating">
-
-
 <i class="fa-solid fa-star"></i>
-
 <i class="fa-solid fa-star"></i>
-
 <i class="fa-solid fa-star"></i>
-
 <i class="fa-solid fa-star"></i>
-
-<i class="fa-solid fa-star"></i>
-
-
-<span>
-(24)
-</span>
-
-
+<i class="fa-solid fa-star-half-stroke"></i>
+<span>(24)</span>
 </div>
 
-
-
-
 <p class="price">
-
 18 500 FCFA
-
 </p>
-
-
-
 
 <button
     class="btn-cart"
     data-id="1"
     data-nom="Robe wax Adinkra"
     data-prix="18500"
-    data-image="images/produits/produit-01.jpg">
-
+    data-image="images/produits/produit-01.jpg"
+    data-taille="s"
+    data-couleur="Multicolore">
+    <i class="fa-solid fa-cart-plus"></i>
     Ajouter au panier
 </button>
 
-
-
 </div>
-
 
 </article>
 
-<!-- ==========================
-     PRODUIT 2
-========================== -->
 
+<!-- PRODUIT 2 -->
 <article class="product-card"
-
 data-categorie="hommes"
-
 data-taille="s m l xl 2xl"
-
 data-couleur="multicolore"
-
-data-prix="14000"
-
+data-prix="10500"
 data-badge="promo"
-
 data-note="4.6">
-
-
 
 <div class="product-image">
 
-<img src="images/produits/produit-02.jpg"
-alt="Chemise Kente homme">
-
+<a href="produit.html?id=2" class="product-image-link">
+<img src="images/produits/produit-02.jpg" alt="Chemise Kente homme">
+</a>
 
 <span class="product-badge promo">
 Promo
 </span>
 
-
-<button class="favorite">
-
+<button class="favorite" aria-label="Ajouter aux favoris">
 <i class="fa-regular fa-heart"></i>
-
 </button>
 
-
 </div>
-
-
 
 <div class="product-info">
 
 <h3>
-Chemise Kente homme
+<a href="produit.html?id=2">Chemise Kente homme</a>
 </h3>
-
 
 <p class="category">
 Hommes
 </p>
 
-
 <div class="rating">
-
-★★★★★
-
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star-half-stroke"></i>
 <span>(17)</span>
-
 </div>
-
 
 <p class="old-price">
 14 000 FCFA
 </p>
 
-
 <p class="price promo-price">
 10 500 FCFA
 </p>
-
 
 <button
     class="btn-cart"
     data-id="2"
     data-nom="Chemise Kente homme"
     data-prix="10500"
-    data-image="images/produits/produit-02.jpg">
-
+    data-image="images/produits/produit-02.jpg"
+    data-taille="s"
+    data-couleur="Multicolore">
+    <i class="fa-solid fa-cart-plus"></i>
     Ajouter au panier
 </button>
 
-
 </div>
-
 
 </article>
 
 
-
-
-
-
-
-<!-- ==========================
-     PRODUIT 3
-========================== -->
-
-
+<!-- PRODUIT 3 -->
 <article class="product-card"
-
 data-categorie="accessoires"
-
 data-taille="unique"
-
 data-couleur="multicolore"
-
 data-prix="9800"
-
 data-badge="tendance"
-
 data-note="4.9">
-
 
 <div class="product-image">
 
-
-<img src="images/produits/produit-03.jpg"
-alt="Sac raphia brodé">
-
+<a href="produit.html?id=3" class="product-image-link">
+<img src="images/produits/produit-03.jpg" alt="Sac raphia brodé">
+</a>
 
 <span class="product-badge trend">
 Tendance
 </span>
 
-
-<button class="favorite">
-
+<button class="favorite" aria-label="Ajouter aux favoris">
 <i class="fa-regular fa-heart"></i>
-
 </button>
-
 
 </div>
 
-
 <div class="product-info">
 
-
 <h3>
-Sac raphia brodé
+<a href="produit.html?id=3">Sac raphia brodé</a>
 </h3>
-
 
 <p class="category">
 Accessoires
 </p>
 
-
 <div class="rating">
-★★★★★
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star-half-stroke"></i>
 <span>(12)</span>
 </div>
-
 
 <p class="price">
 9 800 FCFA
 </p>
 
-
 <button
     class="btn-cart"
     data-id="3"
     data-nom="Sac raphia brodé"
-    data-prix="9 800"
-    data-image="images/produits/produit-01.jpg">
-
+    data-prix="9800"
+    data-image="images/produits/produit-03.jpg"
+    data-taille="Unique"
+    data-couleur="Multicolore">
+    <i class="fa-solid fa-cart-plus"></i>
     Ajouter au panier
 </button>
 
-
 </div>
-
 
 </article>
 
 
-
-
-
-
-
-
-
-<!-- ==========================
-     PRODUIT 4
-========================== -->
-
-
+<!-- PRODUIT 4 -->
 <article class="product-card"
-
 data-categorie="femmes"
-
 data-taille="m l xl 2xl 3xl"
-
 data-couleur="multicolore"
-
-data-prix="22000"
-
+data-prix="17600"
 data-badge="nouveau"
-
 data-note="4.7">
-
 
 <div class="product-image">
 
-
-<img src="images/produits/produit-04.jpg"
-alt="Boubou dashiki modern">
-
+<a href="produit.html?id=4" class="product-image-link">
+<img src="images/produits/produit-04.jpg" alt="Boubou dashiki modern">
+</a>
 
 <span class="product-badge new">
 Nouveau
 </span>
 
-
-<button class="favorite">
-
+<button class="favorite" aria-label="Ajouter aux favoris">
 <i class="fa-regular fa-heart"></i>
-
 </button>
-
 
 </div>
 
-
 <div class="product-info">
 
-
 <h3>
-Boubou dashiki modern
+<a href="produit.html?id=4">Boubou dashiki modern</a>
 </h3>
-
 
 <p class="category">
 Femmes
 </p>
 
-
 <div class="rating">
-★★★★★
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star-half-stroke"></i>
 <span>(31)</span>
 </div>
-
 
 <p class="old-price">
 22 000 FCFA
 </p>
 
-
 <p class="price promo-price">
 17 600 FCFA
 </p>
-
-
 
 <button
     class="btn-cart"
     data-id="4"
     data-nom="Boubou dashiki modern"
     data-prix="17600"
-    data-image="images/produits/produit-01.jpg">
-
+    data-image="images/produits/produit-04.jpg"
+    data-taille="m"
+    data-couleur="Multicolore">
+    <i class="fa-solid fa-cart-plus"></i>
     Ajouter au panier
 </button>
 
-
 </div>
-
 
 </article>
 
 
-
-
-
-
-
 <!-- PRODUIT 5 -->
-
 <article class="product-card"
-
 data-categorie="hommes"
-
 data-taille="s m l xl"
-
 data-couleur="bleu"
-
 data-prix="12500"
-
-data-badge=""
-
+data-badge="nouveau"
 data-note="4.5">
 
+<div class="product-image">
 
-<img src="images/produits/produit-05.jpg"
-alt="Pantalon wax slim homme">
+<a href="produit.html?id=5" class="product-image-link">
+<img src="images/produits/produit-05.jpg" alt="Pantalon wax slim homme">
+</a>
 
-<span class="product-badge promo">
-Nouveauté
+<span class="product-badge new">
+Nouveau
 </span>
 
-
-<button class="favorite">
-
+<button class="favorite" aria-label="Ajouter aux favoris">
 <i class="fa-regular fa-heart"></i>
-
 </button>
+
+</div>
 
 <div class="product-info">
 
 <h3>
-Pantalon wax slim homme
+<a href="produit.html?id=5">Pantalon wax slim homme</a>
 </h3>
-
 
 <p class="category">
 Hommes
 </p>
 
-
 <div class="rating">
-★★★★★
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star-half-stroke"></i>
 <span>(10)</span>
 </div>
-
 
 <p class="price">
 12 500 FCFA
 </p>
 
-
 <button
     class="btn-cart"
     data-id="5"
     data-nom="Pantalon wax slim homme"
-    data-prix="18500"
-    data-image="images/produits/produit-01.jpg">
-
+    data-prix="12500"
+    data-image="images/produits/produit-05.jpg"
+    data-taille="s"
+    data-couleur="Bleu">
+    <i class="fa-solid fa-cart-plus"></i>
     Ajouter au panier
 </button>
 
-
 </div>
-
 
 </article>
 
 
-
-
-
-
-
-
 <!-- PRODUIT 6 -->
 <article class="product-card"
-
 data-categorie="accessoires"
-
 data-taille="unique"
-
 data-couleur="argent"
-
-data-prix="4500"
-
+data-prix="3600"
 data-badge="promo"
-
 data-note="4.8">
 
+<div class="product-image">
 
-<img src="images/produits/produit-06.jpg"
-alt="Bracelet cauris argent">
+<a href="produit.html?id=6" class="product-image-link">
+<img src="images/produits/produit-06.jpg" alt="Bracelet cauris argent">
+</a>
 
 <span class="product-badge promo">
-Mode
+Promo
 </span>
 
-
-<button class="favorite">
-
+<button class="favorite" aria-label="Ajouter aux favoris">
 <i class="fa-regular fa-heart"></i>
-
 </button>
 
+</div>
 
 <div class="product-info">
 
-
 <h3>
-Bracelet cauris argent
+<a href="produit.html?id=6">Bracelet cauris argent</a>
 </h3>
-
 
 <p class="category">
 Accessoires
 </p>
 
 <div class="rating">
-
 <i class="fa-solid fa-star"></i>
-
 <i class="fa-solid fa-star"></i>
-
 <i class="fa-solid fa-star"></i>
-
 <i class="fa-solid fa-star"></i>
-
-<i class="fa-solid fa-star"></i>
-
+<i class="fa-solid fa-star-half-stroke"></i>
 <span>(15)</span>
-
 </div>
 
-
-<p class="price">
-3 600 FCFA
+<p class="old-price">
+4 500 FCFA
 </p>
 
+<p class="price promo-price">
+3 600 FCFA
+</p>
 
 <button
     class="btn-cart"
     data-id="6"
     data-nom="Bracelet cauris argent"
     data-prix="3600"
-    data-image="images/produits/produit-01.jpg">
-
+    data-image="images/produits/produit-06.jpg"
+    data-taille="Unique"
+    data-couleur="Argent">
+    <i class="fa-solid fa-cart-plus"></i>
     Ajouter au panier
 </button>
 
-
 </div>
-
 
 </article>
 
 
-
-
-
-
-
-
 <!-- PRODUIT 7 -->
-
 <article class="product-card"
-
 data-categorie="femmes"
-
 data-taille="xs s m l"
-
 data-couleur="rouge"
-
 data-prix="11000"
-
 data-badge=""
-
 data-note="4.4">
 
+<div class="product-image">
 
-<img src="images/produits/produit-07.jpg"
-alt="Jupe portefeuille wax">
+<a href="produit.html?id=7" class="product-image-link">
+<img src="images/produits/produit-07.jpg" alt="Jupe portefeuille wax">
+</a>
 
-<span class="product-badge promo">
-Promo
-</span>
-
-
-<button class="favorite">
-
+<button class="favorite" aria-label="Ajouter aux favoris">
 <i class="fa-regular fa-heart"></i>
-
 </button>
 
+</div>
 
 <div class="product-info">
 
-
 <h3>
-Jupe portefeuille wax
+<a href="produit.html?id=7">Jupe portefeuille wax</a>
 </h3>
-
 
 <p class="category">
 Femmes
 </p>
 
 <div class="rating">
-★★★★★
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-regular fa-star"></i>
 <span>(10)</span>
 </div>
 
@@ -1482,160 +1097,125 @@ Femmes
 11 000 FCFA
 </p>
 
-
 <button
     class="btn-cart"
     data-id="7"
     data-nom="Jupe portefeuille wax"
     data-prix="11000"
-    data-image="images/produits/produit-01.jpg">
-
+    data-image="images/produits/produit-07.jpg"
+    data-taille="xs"
+    data-couleur="Rouge">
+    <i class="fa-solid fa-cart-plus"></i>
     Ajouter au panier
 </button>
 
 </div>
 
-
 </article>
 
 
-
-
-
-
-
-
 <!-- PRODUIT 8 -->
-
 <article class="product-card"
-
 data-categorie="tissu"
-
 data-taille="unique"
-
 data-couleur="multicolore"
-
 data-prix="8000"
-
 data-badge=""
-
 data-note="4.7">
 
+<div class="product-image">
 
-<img src="images/produits/produit-08.jpg"
-alt="Tissu wax Java">
+<a href="produit.html?id=8" class="product-image-link">
+<img src="images/produits/produit-08.jpg" alt="Tissu wax Java - 6 yards">
+</a>
 
-<span class="product-badge promo">
-Promo
-</span>
-
-
-<button class="favorite">
-
+<button class="favorite" aria-label="Ajouter aux favoris">
 <i class="fa-regular fa-heart"></i>
-
 </button>
+
+</div>
 
 <div class="product-info">
 
-
 <h3>
-Tissu wax Java - 6 yards
+<a href="produit.html?id=8">Tissu wax Java - 6 yards</a>
 </h3>
-
 
 <p class="category">
 Tissu Wax
 </p>
 
 <div class="rating">
-
 <i class="fa-solid fa-star"></i>
-
 <i class="fa-solid fa-star"></i>
-
 <i class="fa-solid fa-star"></i>
-
 <i class="fa-solid fa-star"></i>
-
-<i class="fa-solid fa-star"></i>
-
+<i class="fa-solid fa-star-half-stroke"></i>
 <span>(15)</span>
-
 </div>
-
 
 <p class="price">
 8 000 FCFA
 </p>
-
 
 <button
     class="btn-cart"
     data-id="8"
     data-nom="Tissu wax Java - 6 yards"
     data-prix="8000"
-    data-image="images/produits/produit-01.jpg">
-
+    data-image="images/produits/produit-08.jpg"
+    data-taille="Unique"
+    data-couleur="Multicolore">
+    <i class="fa-solid fa-cart-plus"></i>
     Ajouter au panier
 </button>
 
 </div>
 
-
 </article>
 
 
-
-
-
-
-
-
 <!-- PRODUIT 9 -->
-
 <article class="product-card"
-
 data-categorie="femmes"
-
 data-taille="s m l xl"
-
 data-couleur="multicolore"
-
 data-prix="27500"
-
 data-badge="tendance"
+data-note="5.0">
 
-data-note="5">
+<div class="product-image">
 
+<a href="produit.html?id=9" class="product-image-link">
+<img src="images/produits/produit-09.jpg" alt="Veste wax structurée">
+</a>
 
-<img src="images/produits/produit-09.jpg"
-alt="Veste wax structurée">
-
-<span class="product-badge promo">
-mode
+<span class="product-badge trend">
+Tendance
 </span>
 
-<button class="favorite">
-
+<button class="favorite" aria-label="Ajouter aux favoris">
 <i class="fa-regular fa-heart"></i>
-
 </button>
+
+</div>
 
 <div class="product-info">
 
-
 <h3>
-Veste wax structurée
+<a href="produit.html?id=9">Veste wax structurée</a>
 </h3>
-
 
 <p class="category">
 Femmes
 </p>
 
 <div class="rating">
-★★★★★
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
 <span>(10)</span>
 </div>
 
@@ -1643,315 +1223,216 @@ Femmes
 27 500 FCFA
 </p>
 
-
 <button
     class="btn-cart"
     data-id="9"
     data-nom="Veste wax structurée"
     data-prix="27500"
-    data-image="images/produits/produit-01.jpg">
-
+    data-image="images/produits/produit-09.jpg"
+    data-taille="s"
+    data-couleur="Multicolore">
+    <i class="fa-solid fa-cart-plus"></i>
     Ajouter au panier
 </button>
 
 </div>
 
-
 </article>
 
 
-
-
-
-
-
-
 <!-- PRODUIT 10 -->
-
 <article class="product-card"
-
 data-categorie="accessoires"
-
 data-taille="unique"
-
 data-couleur="multicolore"
-
-data-prix="5500"
-
+data-prix="4400"
 data-badge="promo"
-
 data-note="4.3">
 
+<div class="product-image">
 
-<img src="images/produits/produit-10.jpg"
-alt="Casquette wax brodée">
+<a href="produit.html?id=10" class="product-image-link">
+<img src="images/produits/produit-10.jpg" alt="Casquette wax brodée">
+</a>
 
 <span class="product-badge promo">
 Promo
 </span>
 
-
-<button class="favorite">
-
+<button class="favorite" aria-label="Ajouter aux favoris">
 <i class="fa-regular fa-heart"></i>
-
 </button>
+
+</div>
 
 <div class="product-info">
 
-
 <h3>
-Casquette wax brodée
+<a href="produit.html?id=10">Casquette wax brodée</a>
 </h3>
-
 
 <p class="category">
 Accessoires
 </p>
 
 <div class="rating">
-★★★★★
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-regular fa-star"></i>
 <span>(10)</span>
 </div>
 
-<p class="price">
-4 400 FCFA
+<p class="old-price">
+5 500 FCFA
 </p>
 
+<p class="price promo-price">
+4 400 FCFA
+</p>
 
 <button
     class="btn-cart"
     data-id="10"
     data-nom="Casquette wax brodée"
     data-prix="4400"
-    data-image="images/produits/produit-01.jpg">
-
+    data-image="images/produits/produit-10.jpg"
+    data-taille="Unique"
+    data-couleur="Multicolore">
+    <i class="fa-solid fa-cart-plus"></i>
     Ajouter au panier
 </button>
 
-
 </div>
-
 
 </article>
 
-<!-- ==========================
-     PRODUIT 11
-========================== -->
 
-
+<!-- PRODUIT 11 -->
 <article class="product-card"
-
 data-categorie="enfants"
-
 data-taille="2-4 4-6 6-8"
-
 data-couleur="multicolore"
-
 data-prix="13500"
-
 data-badge="nouveau"
-
 data-note="4.6">
-
 
 <div class="product-image">
 
-
-<img src="images/produits/produit-11.jpg"
-alt="Ensemble 2 pièces garçon">
-
-<span class="product-badge promo">
-Promo
-</span>
-
-
-<button class="favorite">
-
-<i class="fa-regular fa-heart"></i>
-
-</button>
-
+<a href="produit.html?id=11" class="product-image-link">
+<img src="images/produits/produit-11.jpg" alt="Ensemble 2 pièces garçon">
+</a>
 
 <span class="product-badge new">
-
 Nouveau
-
 </span>
 
+<button class="favorite" aria-label="Ajouter aux favoris">
+<i class="fa-regular fa-heart"></i>
+</button>
 
 </div>
-
-
 
 <div class="product-info">
 
-
 <h3>
-Ensemble 2 pièces garçon
+<a href="produit.html?id=11">Ensemble 2 pièces garçon</a>
 </h3>
 
-
 <p class="category">
-
 Enfants
-
 </p>
 
-
-
 <div class="rating">
-
-<div class="rating">
-★★★★★
-<span>(10)</span>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star-half-stroke"></i>
+<span>(14)</span>
 </div>
-
-<span>(8)</span>
-
-</div>
-
-
 
 <p class="price">
-
 13 500 FCFA
-
 </p>
-
-
 
 <button
     class="btn-cart"
     data-id="11"
     data-nom="Ensemble 2 pièces garçon"
     data-prix="13500"
-    data-image="images/produits/produit-01.jpg">
-
+    data-image="images/produits/produit-11.jpg"
+    data-taille="2-4"
+    data-couleur="Multicolore">
+    <i class="fa-solid fa-cart-plus"></i>
     Ajouter au panier
 </button>
 
-
 </div>
-
 
 </article>
 
 
-
-
-
-
-
-
-
-<!-- ==========================
-     PRODUIT 12
-========================== -->
-
-
+<!-- PRODUIT 12 -->
 <article class="product-card"
-
 data-categorie="accessoires"
-
 data-taille="unique"
-
 data-couleur="multicolore"
-
 data-prix="6200"
-
 data-badge=""
-
 data-note="4.9">
-
 
 <div class="product-image">
 
+<a href="produit.html?id=12" class="product-image-link">
+<img src="images/produits/produit-12.jpg" alt="Foulard soie Bogolan">
+</a>
 
-<img src="images/produits/produit-12.jpg"
-alt="Foulard soie Bogolan">
-
-<span class="product-badge promo">
-Promo
-</span>
-
-
-<button class="favorite">
-
+<button class="favorite" aria-label="Ajouter aux favoris">
 <i class="fa-regular fa-heart"></i>
-
 </button>
 
 </div>
 
-
-
-
 <div class="product-info">
 
-
 <h3>
-
-Foulard soie Bogolan
-
+<a href="produit.html?id=12">Foulard soie Bogolan</a>
 </h3>
 
-
-
 <p class="category">
-
 Accessoires
-
 </p>
-
-
 
 <div class="rating">
-
 <i class="fa-solid fa-star"></i>
-
 <i class="fa-solid fa-star"></i>
-
 <i class="fa-solid fa-star"></i>
-
 <i class="fa-solid fa-star"></i>
-
-<i class="fa-solid fa-star"></i>
-
+<i class="fa-solid fa-star-half-stroke"></i>
 <span>(15)</span>
-
 </div>
 
-
-
-
 <p class="price">
-
 6 200 FCFA
-
 </p>
-
-
 
 <button
     class="btn-cart"
     data-id="12"
     data-nom="Foulard soie Bogolan"
     data-prix="6200"
-    data-image="images/produits/produit-01.jpg">
-
+    data-image="images/produits/produit-12.jpg"
+    data-taille="Unique"
+    data-couleur="Multicolore">
+    <i class="fa-solid fa-cart-plus"></i>
     Ajouter au panier
 </button>
 
-
 </div>
 
-
 </article>
-
-
-
-
 
 </div>
 <!-- FIN PRODUCTS GRID -->
@@ -2177,12 +1658,13 @@ Suivez-nous
 <!-- JavaScript -->
 
 
-<script src="js/panier.js"></script>
+
+
+
+
 <script src="js/main.js"></script>
+<script src="js/boutique.js"></script>
 <script src="js/animation.js"></script>
-
-
-
 
 </body>
 
