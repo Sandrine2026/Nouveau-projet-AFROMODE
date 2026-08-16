@@ -383,480 +383,110 @@ function afficherToast(message, type = "success") {
 }
 
 /*====================================================
-            GALERIE PRODUIT
+        AJOUT AU PANIER — SITE ENTIER
+        (boutons .btn-cart sur n'importe quelle page :
+        accueil, boutique, produit...)
 ======================================================*/
 
-const photoPrincipale = document.querySelector("#photo-principale");
+function initBoutonsPanier(){
 
-const miniatures = document.querySelectorAll(".thumbnail");
+    document.querySelectorAll(".btn-cart").forEach(bouton => {
 
-miniatures.forEach(miniature=>{
+        if(bouton.dataset.panierInit === "1") return;
 
-    miniature.addEventListener("click",()=>{
+        bouton.dataset.panierInit = "1";
 
-        miniatures.forEach(img=>img.classList.remove("active"));
+        bouton.addEventListener("click", (e) => {
 
-        miniature.classList.add("active");
+            e.preventDefault();
 
-        const image = miniature.querySelector("img").src;
+            const carte = bouton.closest(".product-card");
 
-        photoPrincipale.src = image;
+            const id = bouton.dataset.id || carte?.dataset.id || carte?.dataset.nom;
+
+            const nom = bouton.dataset.nom || carte?.dataset.nom || "Produit";
+
+            const prix = Number(bouton.dataset.prix || carte?.dataset.prix) || 0;
+
+            const image =
+                bouton.dataset.image ||
+                carte?.querySelector("img")?.getAttribute("src") ||
+                "";
+
+            const taille =
+                bouton.dataset.taille ||
+                carte?.dataset.taille?.split(" ")[0] ||
+                "Unique";
+
+            const couleur =
+                bouton.dataset.couleur ||
+                carte?.dataset.couleur ||
+                "Standard";
+
+            ajouterAuPanier({
+
+                id: String(id),
+
+                nom: nom,
+
+                prix: prix,
+
+                image: image,
+
+                taille: taille,
+
+                couleur: couleur,
+
+                quantite: 1
+
+            });
+
+        });
 
     });
 
-});
+}
+
+document.addEventListener("DOMContentLoaded", initBoutonsPanier);
 
 /*====================================================
-        SELECTION TAILLE
+        FAVORIS — SITE ENTIER
+        Bascule visuelle du cœur (sans persistance)
 ======================================================*/
 
-let tailleSelectionnee = "";
+function initFavoris(){
 
-const tailles = document.querySelectorAll(".size-btn");
+    document.querySelectorAll(".favorite, .favorite-btn").forEach(bouton => {
 
-tailles.forEach(bouton=>{
+        if(bouton.dataset.favInit === "1") return;
 
-    if(bouton.classList.contains("disabled")) return;
+        bouton.dataset.favInit = "1";
 
-    bouton.addEventListener("click",()=>{
+        bouton.addEventListener("click", (e) => {
 
-        tailles.forEach(t=>t.classList.remove("active"));
+            e.preventDefault();
 
-        bouton.classList.add("active");
+            e.stopPropagation();
 
-        tailleSelectionnee = bouton.dataset.taille;
+            bouton.classList.toggle("active");
 
-    });
+            const icone = bouton.querySelector("i");
 
-});
+            if(icone){
 
-/*====================================================
-        SELECTION COULEUR
-======================================================*/
+                icone.classList.toggle("fa-regular");
 
-let couleurSelectionnee = "Multicolore";
+                icone.classList.toggle("fa-solid");
 
-const couleurs = document.querySelectorAll(".color-circle");
+            }
 
-const texteCouleur = document.querySelector("#nom-couleur");
-
-couleurs.forEach(cercle=>{
-
-    cercle.addEventListener("click",()=>{
-
-        couleurs.forEach(c=>c.classList.remove("active"));
-
-        cercle.classList.add("active");
-
-        couleurSelectionnee = cercle.dataset.couleur;
-
-        if(texteCouleur){
-
-            texteCouleur.textContent = couleurSelectionnee;
-
-        }
-
-    });
-
-});
-
-/*====================================================
-        QUANTITE
-======================================================*/
-
-const moins = document.querySelector("#moins");
-
-const plus = document.querySelector("#plus");
-
-const quantiteInput = document.querySelector("#quantite");
-
-if(moins){
-
-    moins.addEventListener("click",()=>{
-
-        if(quantiteInput.value>1){
-
-            quantiteInput.value--;
-
-        }
+        });
 
     });
 
 }
 
-if(plus){
-
-    plus.addEventListener("click",()=>{
-
-        if(quantiteInput.value<10){
-
-            quantiteInput.value++;
-
-        }
-
-    });
-
-}
-
-/*====================================================
-        AJOUT AU PANIER
-======================================================*/
-
-const btnAjouter = document.querySelector("#ajouter-panier");
-
-if(btnAjouter){
-
-    btnAjouter.addEventListener("click",()=>{
-
-        if(tailleSelectionnee===""){
-
-            afficherToast(
-
-                "Veuillez sélectionner une taille",
-
-                "error"
-
-            );
-
-            return;
-
-        }
-
-        const produit={
-
-            id:1,
-
-            nom:"Robe wax Adinkra",
-
-            prix:18500,
-
-            taille:tailleSelectionnee,
-
-            couleur:couleurSelectionnee,
-
-            quantite:Number(quantiteInput.value),
-
-            image:"images/produits/produit-01.jpg"
-
-        };
-
-        ajouterAuPanier(produit);
-
-    });
-
-}
-
-/*====================================================
-            PAGE PANIER
-======================================================*/
-
-const panierContainer = document.querySelector("#panier-container");
-
-const sousTotalElement = document.querySelector("#sous-total");
-
-const livraisonElement = document.querySelector("#livraison");
-
-const reductionElement = document.querySelector("#reduction");
-
-const totalElement = document.querySelector("#total");
-
-/*====================================
-        AFFICHER PANIER
-====================================*/
-
-function afficherPanier(){
-
-    if(!panierContainer) return;
-
-    const panier = lirePanier();
-
-    if(panier.length===0){
-
-        panierContainer.innerHTML=`
-
-            <div class="panier-vide">
-
-                <i class="fa-solid fa-cart-shopping"></i>
-
-                <h2>Votre panier est vide</h2>
-
-                <a href="boutique.html" class="btn">
-
-                    Continuer mes achats
-
-                </a>
-
-            </div>
-
-        `;
-
-        calculerTotal();
-
-        return;
-
-    }
-
-    panierContainer.innerHTML="";
-
-    panier.forEach(article=>{
-
-        panierContainer.innerHTML+=`
-
-        <div class="cart-item">
-
-            <img src="${article.image}" alt="${article.nom}">
-
-            <div class="cart-info">
-
-                <h3>${article.nom}</h3>
-
-                <p>Taille : ${article.taille}</p>
-
-                <p>Couleur : ${article.couleur}</p>
-
-                <strong>${article.prix.toLocaleString()} FCFA</strong>
-
-            </div>
-
-            <div class="quantity-box">
-
-                <button class="moins"
-
-                    data-id="${article.id}"
-
-                    data-taille="${article.taille}"
-
-                    data-couleur="${article.couleur}">
-
-                    -
-
-                </button>
-
-                <span>${article.quantite}</span>
-
-                <button class="plus"
-
-                    data-id="${article.id}"
-
-                    data-taille="${article.taille}"
-
-                    data-couleur="${article.couleur}">
-
-                    +
-
-                </button>
-
-            </div>
-
-            <button
-
-                class="supprimer"
-
-                data-id="${article.id}"
-
-                data-taille="${article.taille}"
-
-                data-couleur="${article.couleur}">
-
-                <i class="fa-solid fa-trash"></i>
-
-            </button>
-
-        </div>
-
-        `;
-
-    });
-
-    calculerTotal();
-
-}
-/*====================================================
-            CODES PROMO
-======================================================*/
-
-const promoInput = document.querySelector("#code-promo");
-
-const promoButton = document.querySelector("#appliquer-promo");
-
-/*====================================
-        APPLIQUER CODE PROMO
-====================================*/
-
-function appliquerCodePromo(){
-
-    if(!promoInput) return;
-
-    const code = promoInput.value.trim().toUpperCase();
-
-    const codesValides = [
-
-        "AFRO10",
-
-        "HOMME20",
-
-        "LIVRAISON"
-
-    ];
-
-    if(codesValides.includes(code)){
-
-        localStorage.setItem("promo",code);
-
-        afficherToast(
-
-            "Code promo appliqué avec succès !",
-
-            "success"
-
-        );
-
-    }else{
-
-        localStorage.removeItem("promo");
-
-        afficherToast(
-
-            "Code promo invalide",
-
-            "error"
-
-        );
-
-    }
-
-    calculerTotal();
-
-}
-
-/*====================================
-        EVENEMENT BOUTON
-====================================*/
-
-if(promoButton){
-
-    promoButton.addEventListener(
-
-        "click",
-
-        appliquerCodePromo
-
-    );
-
-}
-
-/*====================================================
-            FORMULAIRE COMMANDE
-======================================================*/
-
-const formulaireCommande = document.querySelector("#form-commande");
-
-if(formulaireCommande){
-
-    formulaireCommande.addEventListener("submit",(e)=>{
-
-        e.preventDefault();
-
-        if(validerCommande()){
-
-            confirmerCommande();
-        }
-
-    });
-
-}
-
-/*====================================
-        VALIDATION
-====================================*/
-
-function validerCommande(){
-
-    let valide = true;
-
-    const prenom = document.querySelector("#prenom");
-    const nom = document.querySelector("#nom");
-    const telephone = document.querySelector("#telephone");
-    const adresse = document.querySelector("#adresse");
-    const paiement = document.querySelector("input[name='paiement']:checked");
-
-    if(!/^[A-Za-zÀ-ÿ\s]{2,}$/.test(prenom.value)){
-
-        afficherErreur(prenom,"Veuillez saisir un prénom valide");
-
-        valide = false;
-
-    }else{
-
-        supprimerErreur(prenom);
-
-    }
-
-    if(!/^[A-Za-zÀ-ÿ\s]{2,}$/.test(nom.value)){
-
-        afficherErreur(nom,"Veuillez saisir un nom valide");
-
-        valide = false;
-
-    }else{
-
-        supprimerErreur(nom);
-
-    }
-
-    if(!/^[0-9]{8,}$/.test(telephone.value)){
-
-        afficherErreur(
-
-            telephone,
-
-            "Numéro invalide (min. 8 chiffres)"
-
-        );
-
-        valide = false;
-
-    }else{
-
-        supprimerErreur(telephone);
-
-    }
-
-    if(adresse.value.length < 10){
-
-        afficherErreur(
-
-            adresse,
-
-            "Adresse trop courte"
-
-        );
-
-        valide = false;
-
-    }else{
-
-        supprimerErreur(adresse);
-
-    }
-
-    if(!paiement){
-
-        afficherToast(
-
-            "Veuillez choisir un mode de paiement",
-
-            "error"
-
-        );
-
-        valide = false;
-
-    }
-
-    return valide;
-
-}
+document.addEventListener("DOMContentLoaded", initFavoris);
 
 
 /*====================================================
@@ -1101,97 +731,3 @@ function initTemoignagesSlider(){
 }
 
 document.addEventListener("DOMContentLoaded", initTemoignagesSlider);
-
-/*====================================================
-        AJOUT AU PANIER — SECTION "NOUVEAUTES"
-        (cartes produits sur la page d'accueil)
-======================================================*/
-
-function initAjoutPanierNouveautes(){
-
-    const section = document.querySelector("#nouveautes");
-
-    if(!section) return;
-
-    const cartes = section.querySelectorAll(".product-card");
-
-    cartes.forEach(carte => {
-
-        const boutonAjouter = carte.querySelector(".btn-cart");
-
-        if(!boutonAjouter) return;
-
-        boutonAjouter.addEventListener("click", () => {
-
-            const nom = carte.dataset.nom || "Produit";
-
-            const prix = Number(carte.dataset.prix) || 0;
-
-            const image = carte.querySelector("img")?.getAttribute("src") || "";
-
-            const produit = {
-
-                id: nom,
-
-                nom: nom,
-
-                prix: prix,
-
-                taille: "Unique",
-
-                couleur: "Standard",
-
-                quantite: 1,
-
-                image: image
-
-            };
-
-            ajouterAuPanier(produit);
-
-        });
-
-    });
-
-}
-
-document.addEventListener("DOMContentLoaded", initAjoutPanierNouveautes);
-
-/*====================================================
-        FAVORIS — SECTION "NOUVEAUTES"
-        Bascule visuelle du cœur (sans persistance)
-======================================================*/
-
-function initFavorisNouveautes(){
-
-    const section = document.querySelector("#nouveautes");
-
-    if(!section) return;
-
-    const boutonsFavoris = section.querySelectorAll(".favorite");
-
-    boutonsFavoris.forEach(bouton => {
-
-        bouton.addEventListener("click", (e) => {
-
-            e.stopPropagation();
-
-            bouton.classList.toggle("active");
-
-            const icone = bouton.querySelector("i");
-
-            if(icone){
-
-                icone.classList.toggle("fa-regular");
-
-                icone.classList.toggle("fa-solid");
-
-            }
-
-        });
-
-    });
-
-}
-
-document.addEventListener("DOMContentLoaded", initFavorisNouveautes);

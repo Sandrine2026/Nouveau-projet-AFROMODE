@@ -1,45 +1,23 @@
 /*==================================================
-                PANIER AFROMODE
+        AFROMODE — PAGE PANIER
+        Contrôleur d'affichage uniquement.
+        La donnée du panier (lecture/écriture/badge)
+        est centralisée dans main.js (lirePanier,
+        sauvegarderPanier, ajouterAuPanier,
+        supprimerArticle, modifierQuantite...).
 ==================================================*/
 
-// Récupération du panier
-let panier = JSON.parse(localStorage.getItem("panier")) || [];
+const cartContainer = document.getElementById("cart-container");
 
-/*==================================================
-            SAUVEGARDE LOCALSTORAGE
-==================================================*/
+const REDUCTIONS = {
 
-function sauvegarderPanier() {
+    "AFRO10": 10,
+    "HOMME20": 20,
+    "LIVRAISON": 0
 
-    localStorage.setItem("panier", JSON.stringify(panier));
+};
 
-    mettreAJourBadge();
-
-}
-
-/*==================================================
-                BADGE PANIER
-==================================================*/
-
-function mettreAJourBadge() {
-
-    const badges = document.querySelectorAll(".cart-badge");
-
-    let total = 0;
-
-    panier.forEach(produit => {
-
-        total += produit.quantite;
-
-    });
-
-    badges.forEach(badge => {
-
-        badge.textContent = total;
-
-    });
-
-}
+const FRAIS_LIVRAISON = 2500;
 
 /*==================================================
             FORMAT PRIX
@@ -47,205 +25,270 @@ function mettreAJourBadge() {
 
 function formatPrix(prix){
 
-    return prix.toLocaleString("fr-FR") + " FCFA";
+    return Number(prix).toLocaleString("fr-FR") + " FCFA";
 
 }
-/*==================================================
-            AJOUTER AU PANIER
-==================================================*/
 
-const boutonsPanier = document.querySelectorAll(".btn-cart");
-
-boutonsPanier.forEach(bouton => {
-
-    bouton.addEventListener("click", function () {
-
-        const produit = {
-
-            id: this.dataset.id,
-
-            nom: this.dataset.nom,
-
-            prix: Number(this.dataset.prix),
-
-            image: this.dataset.image,
-
-            quantite: 1
-
-        };
-
-        ajouterProduit(produit);
-
-    });
-
-});
-
-/*==================================================
-            AJOUT D'UN PRODUIT
-==================================================*/
-
-function ajouterProduit(produit){
-
-    const index = panier.findIndex(item => item.id === produit.id);
-
-    if(index !== -1){
-
-        panier[index].quantite++;
-
-    }else{
-
-        panier.push(produit);
-
-    }
-
-    sauvegarderPanier();
-
-    afficherPanier();
-
-    alert("Produit ajouté au panier avec succès !");
-
-}
 /*==================================================
             AFFICHAGE DU PANIER
 ==================================================*/
 
-function afficherPanier() {
+function afficherPanier(){
 
-    const container = document.getElementById("cart-container");
+    if(!cartContainer) return;
 
-    if (!container) return;
+    const panier = lirePanier();
 
-    container.innerHTML = "";
+    if(panier.length === 0){
 
-    let sousTotal = 0;
+        cartContainer.innerHTML = `
 
-    panier.forEach((produit, index) => {
+            <div class="panier-vide">
 
-        sousTotal += produit.prix * produit.quantite;
+                <i class="fa-solid fa-cart-shopping"></i>
 
-        container.innerHTML += `
+                <h2>Votre panier est vide</h2>
 
-        <div class="cart-item">
+                <p>Découvrez notre collection et trouvez votre bonheur.</p>
 
-            <img src="${produit.image}" alt="${produit.nom}" class="cart-image">
+                <a href="boutique.html" class="btn btn-primary">
 
-            <div class="cart-details">
+                    Continuer mes achats
 
-                <h3>${produit.nom}</h3>
-
-                <p>${formatPrix(produit.prix)}</p>
+                </a>
 
             </div>
 
-            <div class="cart-quantity">
+        `;
 
-                <button class="moins" onclick="modifierQuantite(${index},-1)">−</button>
+        calculerTotal();
 
-                <span>${produit.quantite}</span>
+        return;
 
-                <button class="plus" onclick="modifierQuantite(${index},1)">+</button>
+    }
+
+    cartContainer.innerHTML = "";
+
+    panier.forEach(article => {
+
+        const div = document.createElement("div");
+
+        div.className = "cart-item";
+
+        div.innerHTML = `
+
+            <img src="${article.image}" alt="${article.nom}">
+
+            <div class="cart-info">
+
+                <h3>${article.nom}</h3>
+
+                <p>Taille : ${article.taille} &nbsp;•&nbsp; Couleur : ${article.couleur}</p>
+
+                <strong class="cart-item-price">${formatPrix(article.prix)}</strong>
 
             </div>
 
-            <div class="cart-price">
+            <div class="quantity-box">
 
-                ${formatPrix(produit.prix * produit.quantite)}
+                <button class="moins" aria-label="Diminuer la quantité">−</button>
+
+                <span>${article.quantite}</span>
+
+                <button class="plus" aria-label="Augmenter la quantité">+</button>
 
             </div>
 
-            <button class="delete-btn"
+            <div class="cart-line-total">
 
-                onclick="supprimerProduit(${index})">
+                ${formatPrix(article.prix * article.quantite)}
+
+            </div>
+
+            <button class="supprimer" aria-label="Retirer l'article">
 
                 <i class="fa-solid fa-trash"></i>
 
             </button>
 
-        </div>
-
         `;
 
-    });
+        const boutonMoins = div.querySelector(".moins");
+        const boutonPlus = div.querySelector(".plus");
+        const boutonSupprimer = div.querySelector(".supprimer");
 
-    document.getElementById("subtotal").textContent = formatPrix(sousTotal);
+        boutonMoins.addEventListener("click", () => {
+
+            const nouvelleQuantite = article.quantite - 1;
+
+            if(nouvelleQuantite <= 0){
+
+                supprimerArticle(article.id, article.taille, article.couleur);
+
+            }else{
+
+                modifierQuantite(article.id, article.taille, article.couleur, nouvelleQuantite);
+
+            }
+
+            afficherPanier();
+
+        });
+
+        boutonPlus.addEventListener("click", () => {
+
+            modifierQuantite(article.id, article.taille, article.couleur, article.quantite + 1);
+
+            afficherPanier();
+
+        });
+
+        boutonSupprimer.addEventListener("click", () => {
+
+            supprimerArticle(article.id, article.taille, article.couleur);
+
+            afficherToast(`${article.nom} retiré du panier`);
+
+            afficherPanier();
+
+        });
+
+        cartContainer.appendChild(div);
+
+    });
 
     calculerTotal();
 
 }
-/*==================================================
-            MODIFIER QUANTITÉ
-==================================================*/
-
-function modifierQuantite(index, variation){
-
-    panier[index].quantite += variation;
-
-    if(panier[index].quantite <= 0){
-
-        panier.splice(index,1);
-
-    }
-
-    sauvegarderPanier();
-
-    afficherPanier();
-
-}
 
 /*==================================================
-            SUPPRIMER PRODUIT
-==================================================*/
-
-function supprimerProduit(index){
-
-    if(confirm("Supprimer ce produit ?")){
-
-        panier.splice(index,1);
-
-        sauvegarderPanier();
-
-        afficherPanier();
-
-    }
-
-}
-/*==================================================
-            CALCUL TOTAL
+            CALCUL DU TOTAL
 ==================================================*/
 
 function calculerTotal(){
 
+    const panier = lirePanier();
+
     let sousTotal = 0;
 
-    panier.forEach(produit=>{
+    panier.forEach(article => {
 
-        sousTotal += produit.prix * produit.quantite;
+        sousTotal += article.prix * article.quantite;
 
     });
 
-    const livraison = panier.length > 0 ? 2500 : 0;
+    const codePromo = localStorage.getItem("promo");
 
-    const montantReduction = sousTotal * reduction / 100;
+    const pourcentageReduction = codePromo && REDUCTIONS[codePromo] !== undefined
+        ? REDUCTIONS[codePromo]
+        : 0;
+
+    const montantReduction = Math.round(sousTotal * pourcentageReduction / 100);
+
+    const livraison = panier.length > 0 ? FRAIS_LIVRAISON : 0;
 
     const total = sousTotal - montantReduction + livraison;
 
-    document.getElementById("subtotal").textContent =
-        formatPrix(sousTotal);
+    const elSubtotal = document.getElementById("subtotal");
+    const elDiscount = document.getElementById("discount");
+    const elDelivery = document.getElementById("delivery");
+    const elTotal = document.getElementById("total");
+    const discountLine = document.getElementById("discount-line");
 
-    document.getElementById("discount").textContent =
-        formatPrix(montantReduction);
+    if(elSubtotal) elSubtotal.textContent = formatPrix(sousTotal);
 
-    document.getElementById("delivery").textContent =
-        formatPrix(livraison);
+    if(elDiscount) elDiscount.textContent = "-" + formatPrix(montantReduction);
 
-    document.getElementById("total").textContent =
-        formatPrix(total);
+    if(elDelivery) elDelivery.textContent = panier.length > 0 ? formatPrix(livraison) : formatPrix(0);
+
+    if(elTotal) elTotal.textContent = formatPrix(total);
+
+    if(discountLine){
+
+        discountLine.style.display = montantReduction > 0 ? "flex" : "none";
+
+    }
 
 }
+
+/*==================================================
+            CODE PROMO
+==================================================*/
+
+const promoInput = document.getElementById("promo-code");
+const promoButton = document.getElementById("apply-promo");
+const promoMessage = document.getElementById("promo-message");
+
+function appliquerCodePromo(){
+
+    if(!promoInput) return;
+
+    const code = promoInput.value.trim().toUpperCase();
+
+    if(REDUCTIONS[code] !== undefined){
+
+        localStorage.setItem("promo", code);
+
+        if(promoMessage){
+
+            promoMessage.textContent = REDUCTIONS[code] > 0
+                ? `Code appliqué : -${REDUCTIONS[code]}% sur le sous-total`
+                : "Code appliqué";
+
+            promoMessage.className = "success";
+
+        }
+
+        afficherToast("Code promo appliqué avec succès !");
+
+    }else{
+
+        localStorage.removeItem("promo");
+
+        if(promoMessage){
+
+            promoMessage.textContent = "Code promo invalide";
+
+            promoMessage.className = "error";
+
+        }
+
+        afficherToast("Code promo invalide", "error");
+
+    }
+
+    calculerTotal();
+
+}
+
+if(promoButton){
+
+    promoButton.addEventListener("click", appliquerCodePromo);
+
+}
+
+if(promoInput){
+
+    promoInput.addEventListener("keydown", (e) => {
+
+        if(e.key === "Enter"){
+
+            e.preventDefault();
+
+            appliquerCodePromo();
+
+        }
+
+    });
+
+}
+
 /*==================================================
             INITIALISATION
 ==================================================*/
 
-mettreAJourBadge();
+document.addEventListener("DOMContentLoaded", () => {
 
-afficherPanier();
+    afficherPanier();
+
+});

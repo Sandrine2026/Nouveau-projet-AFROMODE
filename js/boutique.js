@@ -1,45 +1,32 @@
-/*=========================================
+/*=========================================================
+        AFROMODE — PAGE BOUTIQUE
+        Recherche, filtres, tri, vue grille/liste
+=========================================================*/
+
+const grilleProduits = document.querySelector("#products-container");
+
+const cartesProduits = () =>
+    Array.from(document.querySelectorAll("#products-container .product-card"));
+
+/*=========================================================
         RECHERCHE DYNAMIQUE
-==========================================*/
+=========================================================*/
 
-const searchInput = document.getElementById("search-input");
-const products = document.querySelectorAll(".product-card");
+const champRechercheBoutique = document.getElementById("search-input");
 
-if (searchInput) {
+if (champRechercheBoutique) {
 
-    searchInput.addEventListener("input", function () {
+    champRechercheBoutique.addEventListener("input", function () {
 
-        const mot = this.value.toLowerCase();
-
-        products.forEach(product => {
-
-            const nom = product.querySelector("h3").textContent.toLowerCase();
-
-            const categorie = product.dataset.categorie.toLowerCase();
-
-            if (
-                nom.includes(mot) ||
-                categorie.includes(mot)
-            ) {
-
-                product.style.display = "block";
-
-            } else {
-
-                product.style.display = "none";
-
-            }
-
-        });
-
-        mettreAJourCompteur();
+        appliquerFiltres();
 
     });
 
 }
-/*=========================================
-            CURSEUR PRIX
-==========================================*/
+
+/*=========================================================
+        CURSEUR PRIX
+=========================================================*/
 
 const priceRange = document.getElementById("price-range");
 const priceValue = document.getElementById("price-value");
@@ -48,100 +35,138 @@ if (priceRange) {
 
     priceRange.addEventListener("input", () => {
 
-        priceValue.textContent = priceRange.value;
+        if (priceValue) {
+
+            priceValue.textContent = Number(priceRange.value).toLocaleString("fr-FR");
+
+        }
+
+        appliquerFiltres();
 
     });
 
 }
 
-/*=========================================
+/*=========================================================
+        LECTURE DES CASES COCHEES PAR GROUPE
+=========================================================*/
+
+function valeursCochees(nomFiltre) {
+
+    const groupe = document.querySelector(`.filter-group[data-filter="${nomFiltre}"]`);
+
+    if (!groupe) return [];
+
+    return Array.from(
+
+        groupe.querySelectorAll("input[type='checkbox']:checked")
+
+    ).map(input => input.value.toLowerCase());
+
+}
+
+/*=========================================================
         COMPTEUR PRODUITS
-==========================================*/
+=========================================================*/
 
-function mettreAJourCompteur() {
-
-    const visibles = document.querySelectorAll(
-
-        ".product-card:not([style*='display: none'])"
-
-    );
+function mettreAJourCompteur(nombreVisibles) {
 
     const compteur = document.getElementById("product-count");
 
     if (compteur) {
 
         compteur.textContent =
-
-            visibles.length +
-
-            " produit(s) trouvé(s)";
+            nombreVisibles + (nombreVisibles > 1 ? " produits trouvés" : " produit trouvé");
 
     }
 
 }
-/*=========================================
-        FILTRES MULTI-CRITÈRES
-==========================================*/
+
+/*=========================================================
+        APPLICATION DES FILTRES (+ recherche)
+=========================================================*/
+
+function appliquerFiltres() {
+
+    const categories = valeursCochees("categorie");
+    const tailles = valeursCochees("taille");
+    const couleurs = valeursCochees("couleur");
+    const statuts = valeursCochees("statut");
+
+    const prixMax = priceRange ? Number(priceRange.value) : Infinity;
+
+    const mot = champRechercheBoutique
+        ? champRechercheBoutique.value.trim().toLowerCase()
+        : "";
+
+    let visibles = 0;
+
+    cartesProduits().forEach(carte => {
+
+        const nomProduit = carte.querySelector("h3")?.textContent.trim().toLowerCase() || "";
+        const categorieProduit = (carte.dataset.categorie || "").toLowerCase();
+        const taillesProduit = (carte.dataset.taille || "").toLowerCase().split(" ");
+        const couleurProduit = (carte.dataset.couleur || "").toLowerCase();
+        const prixProduit = Number(carte.dataset.prix) || 0;
+        const badgeProduit = (carte.dataset.badge || "").toLowerCase();
+
+        const rechercheOK =
+            mot === "" ||
+            nomProduit.includes(mot) ||
+            categorieProduit.includes(mot);
+
+        const categorieOK =
+            categories.length === 0 || categories.includes(categorieProduit);
+
+        const tailleOK =
+            tailles.length === 0 ||
+            tailles.some(t => taillesProduit.includes(t));
+
+        const couleurOK =
+            couleurs.length === 0 || couleurs.includes(couleurProduit);
+
+        const prixOK = prixProduit <= prixMax;
+
+        const statutOK =
+            statuts.length === 0 || statuts.includes(badgeProduit);
+
+        const estVisible =
+            rechercheOK && categorieOK && tailleOK &&
+            couleurOK && prixOK && statutOK;
+
+        carte.style.display = estVisible ? "" : "none";
+
+        if (estVisible) visibles++;
+
+    });
+
+    mettreAJourCompteur(visibles);
+
+}
+
+/*=========================================================
+        BOUTON "APPLIQUER LES FILTRES"
+=========================================================*/
 
 const btnFiltrer = document.getElementById("btn-filtrer");
 
 if (btnFiltrer) {
 
-    btnFiltrer.addEventListener("click", filtrerProduits);
+    btnFiltrer.addEventListener("click", appliquerFiltres);
 
 }
 
-function filtrerProduits() {
+/* Filtrage instantané dès qu'une case est cochée/décochée */
 
-    const categorie = document.getElementById("filtre-categorie").value;
+document.querySelectorAll(".filter-group input[type='checkbox']").forEach(input => {
 
-    const taille = document.getElementById("filtre-taille").value;
+    input.addEventListener("change", appliquerFiltres);
 
-    const couleur = document.getElementById("filtre-couleur").value;
+});
 
-    const prixMax = Number(document.getElementById("price-range").value);
-
-    products.forEach(product => {
-
-        const categorieProduit = product.dataset.categorie;
-
-        const tailleProduit = product.dataset.taille;
-
-        const couleurProduit = product.dataset.couleur;
-
-        const prixProduit = Number(product.dataset.prix);
-
-        const categorieOK =
-            categorie === "" || categorieProduit === categorie;
-
-        const tailleOK =
-            taille === "" || tailleProduit.includes(taille);
-
-        const couleurOK =
-            couleur === "" || couleurProduit.includes(couleur);
-
-        const prixOK =
-            prixProduit <= prixMax;
-
-        if (categorieOK && tailleOK && couleurOK && prixOK) {
-
-            product.style.display = "block";
-
-        } else {
-
-            product.style.display = "none";
-
-        }
-
-    });
-
-    mettreAJourCompteur();
-
-}
-
-/*=========================================
+/*=========================================================
         REINITIALISER FILTRES
-==========================================*/
+=========================================================*/
 
 const btnReset = document.getElementById("btn-reset");
 
@@ -149,31 +174,39 @@ if (btnReset) {
 
     btnReset.addEventListener("click", () => {
 
-        document.getElementById("filtre-categorie").value = "";
+        document.querySelectorAll(".filter-group input[type='checkbox']").forEach(input => {
 
-        document.getElementById("filtre-taille").value = "";
-
-        document.getElementById("filtre-couleur").value = "";
-
-        document.getElementById("price-range").value = 50000;
-
-        document.getElementById("price-value").textContent = "50000";
-
-        products.forEach(product => {
-
-            product.style.display = "block";
+            input.checked = false;
 
         });
 
-        mettreAJourCompteur();
+        if (priceRange) {
+
+            priceRange.value = priceRange.max || 50000;
+
+            if (priceValue) {
+
+                priceValue.textContent = Number(priceRange.value).toLocaleString("fr-FR");
+
+            }
+
+        }
+
+        if (champRechercheBoutique) {
+
+            champRechercheBoutique.value = "";
+
+        }
+
+        appliquerFiltres();
 
     });
 
 }
 
-/*=========================================
-            TRI DES PRODUITS
-==========================================*/
+/*=========================================================
+        TRI DES PRODUITS
+=========================================================*/
 
 const triProduits = document.getElementById("tri-produits");
 
@@ -185,95 +218,140 @@ if (triProduits) {
 
 function trierProduits() {
 
-    const grille = document.querySelector(".products-grid");
+    if (!grilleProduits) return;
 
-    const produits = [...document.querySelectorAll(".product-card")];
+    const produits = cartesProduits();
 
     switch (triProduits.value) {
 
-        case "prix-asc":
+        case "price-asc":
+
+            produits.sort((a, b) =>
+                Number(a.dataset.prix) - Number(b.dataset.prix)
+            );
+
+            break;
+
+        case "price-desc":
+
+            produits.sort((a, b) =>
+                Number(b.dataset.prix) - Number(a.dataset.prix)
+            );
+
+            break;
+
+        case "new":
 
             produits.sort((a, b) => {
 
-                return Number(a.dataset.prix) -
+                const aNew = a.dataset.badge === "nouveau" ? 1 : 0;
+                const bNew = b.dataset.badge === "nouveau" ? 1 : 0;
 
-                       Number(b.dataset.prix);
+                return bNew - aNew;
 
             });
 
-        break;
+            break;
 
-        case "prix-desc":
+        case "rating":
+
+            produits.sort((a, b) =>
+                Number(b.dataset.note) - Number(a.dataset.note)
+            );
+
+            break;
+
+        default:
 
             produits.sort((a, b) => {
 
-                return Number(b.dataset.prix) -
+                const idA = a.querySelector(".btn-cart")?.dataset.id || 0;
+                const idB = b.querySelector(".btn-cart")?.dataset.id || 0;
 
-                       Number(a.dataset.prix);
-
-            });
-
-        break;
-
-        case "nouveautes":
-
-            produits.sort((a, b) => {
-
-                return b.dataset.badge.localeCompare(a.dataset.badge);
+                return Number(idA) - Number(idB);
 
             });
-
-        break;
-
-        case "note":
-
-            produits.sort((a, b) => {
-
-                return Number(b.dataset.note) -
-
-                       Number(a.dataset.note);
-
-            });
-
-        break;
 
     }
 
     produits.forEach(produit => {
 
-        grille.appendChild(produit);
+        grilleProduits.appendChild(produit);
 
     });
 
 }
 
-/*=========================================
-            VUE GRILLE / LISTE
-==========================================*/
+/*=========================================================
+        VUE GRILLE / LISTE
+=========================================================*/
 
 const btnGrille = document.getElementById("vue-grille");
-
 const btnListe = document.getElementById("vue-liste");
 
-const grille = document.querySelector(".products-grid");
+if (btnGrille) {
 
-if(btnGrille){
+    btnGrille.addEventListener("click", () => {
 
-    btnGrille.addEventListener("click",()=>{
+        grilleProduits?.classList.remove("liste");
 
-        grille.classList.remove("liste");
-
-    });
-
-}
-
-if(btnListe){
-
-    btnListe.addEventListener("click",()=>{
-
-        grille.classList.add("liste");
+        btnGrille.classList.add("active");
+        btnListe?.classList.remove("active");
 
     });
 
 }
 
+if (btnListe) {
+
+    btnListe.addEventListener("click", () => {
+
+        grilleProduits?.classList.add("liste");
+
+        btnListe.classList.add("active");
+        btnGrille?.classList.remove("active");
+
+    });
+
+}
+
+/*=========================================================
+        LECTURE D'UN PARAMETRE D'URL (ex: boutique.html?categorie=hommes)
+=========================================================*/
+
+function appliquerFiltreDepuisURL() {
+
+    const params = new URLSearchParams(window.location.search);
+    const categorie = params.get("categorie");
+
+    if (!categorie) return;
+
+    const cases = document.querySelectorAll(
+        `.filter-group[data-filter="categorie"] input[type="checkbox"]`
+    );
+
+    cases.forEach(input => {
+
+        if (input.value.toLowerCase() === categorie.toLowerCase()) {
+
+            input.checked = true;
+
+        }
+
+    });
+
+}
+
+/*=========================================================
+        INITIALISATION
+=========================================================*/
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    appliquerFiltreDepuisURL();
+
+    appliquerFiltres();
+
+    btnGrille?.classList.add("active");
+
+});
